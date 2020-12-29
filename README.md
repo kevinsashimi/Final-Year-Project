@@ -8,14 +8,14 @@ Student is expected to be strong in programming and like math.
 Weak student will find this project a challenge, so not advisbale to take this project. But good students will enjoy doing this project.
 
 Specific details:
-  (a) Design component
-  Ways to hide weakness in implementation.
+* (a) Design component
+  * Ways to hide weakness in implementation.
 
 
-  (b) Implementation component
-  Based on ways in (a), student will write programs to implement algorithm.
+* (b) Implementation component
+  * Based on ways in (a), student will write programs to implement algorithm.
 
-  (a) Research component
-  Enterprising student will create their own weak implementations, beyond what advisor teach them.
+* (c) Research component
+  * Enterprising student will create their own weak implementations, beyond what advisor teach them.
 
-  (b) Development component
+* (d) Development component
