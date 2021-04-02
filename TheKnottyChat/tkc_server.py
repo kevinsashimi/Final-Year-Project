@@ -5,6 +5,7 @@ import os
 import time
 import tkc_database as db
 
+from aes_ecb import ElectronicCodeBookAES
 from aes_cbc import CipherBlockChainingAES
 from random import randint, seed
 from prettytable import PrettyTable
@@ -16,12 +17,19 @@ FORMAT = "utf-8"
 An empty string in SERVER_IP allows the server to listen
 to requests coming from other computers on the network
 """
+# Generate AES ciphers
+cipher_ecb = ElectronicCodeBookAES()
+cipher_cbc = CipherBlockChainingAES()
+
+# Default Settings
 SERVER_IP = ''  # Server to listen on all interfaces
 SERVER_PORT = 5000
 SERVER_SHELL_PORT = 5050
 seed(123)
-cipher = CipherBlockChainingAES()
-auto_chat = True
+encryption_type = 'aes'
+cipher = cipher_cbc
+display_cipher = cipher_cbc
+auto_chat = False
 encryption = True
 
 
@@ -88,6 +96,7 @@ class Server(threading.Thread):
     """
     @staticmethod
     def send_message(client_socket, message):
+        global cipher
         # For server to send message to individual client
         message_data = cipher.encrypt(message)
         message_header = f"{len(message_data):<{HEADER_LENGTH}}".encode(FORMAT)
@@ -95,6 +104,7 @@ class Server(threading.Thread):
 
     @staticmethod
     def receive_message(client_socket):
+        global cipher
         # For server to receive message from individual client
         try:
             message_header = client_socket.recv(HEADER_LENGTH)
@@ -302,8 +312,10 @@ class Client(threading.Thread):
                 server.send_message(client_socket, '401')
 
     def chatroom(self):
+        global cipher
         global auto_chat
         global encryption
+        global display_cipher
         while True:
             try:
                 if auto_chat:
@@ -334,7 +346,7 @@ class Client(threading.Thread):
                         break
 
                     if encryption:
-                        print(cipher.encrypt(message).decode(FORMAT))
+                        print(display_cipher.encrypt(message).decode(FORMAT))
 
                     else:
                         print(f"{current_time()} [{self.client_socket.getpeername()}]"
@@ -515,7 +527,9 @@ def execute_commands(target):
 
 
 def turtle():
+    global display_cipher
     global encryption
+    print("Welcome to Turtle Shell!\nType 'help' for a list of commands")
     while True:
         cmd = input("turtle> ")
         if not cmd:
@@ -552,6 +566,31 @@ def turtle():
             else:
                 print("Invalid input field after 'aes' command ('on' or 'off' switch expected)")
                 print("Please try again")
+
+        elif cmd[0:6] == 'cipher':
+            cmd = cmd.replace("cipher ", "")
+            if cmd == 'cbc':
+                display_cipher = cipher_cbc
+                print("AES Encryption mode changed to Cipher Block Chaining")
+
+            elif cmd == 'ecb':
+                display_cipher = cipher_ecb
+                print("AES Encryption mode changed to Electronic Codebook")
+
+            else:
+                print("Invalid input field after 'cipher' command ('cbc' or 'ecb' switch expected)")
+                print("Please try again")
+
+        elif cmd == 'help':
+            print(
+                """
+                Available commands:
+                list
+                select [option] where option=1,2 or 3,...
+                aes [on/off]
+                cipher [cbc/ecb]
+                """
+            )
 
         else:
             print("Command not recognized")

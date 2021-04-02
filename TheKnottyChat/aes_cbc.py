@@ -20,22 +20,22 @@ class CipherBlockChainingAES:
         # Generate Initialization Vector
         iv = get_random_bytes(16)
 
-        # Generate cipher
-        cipher = AES.new(self.key, AES.MODE_CBC, iv)
+        # Generate AES CBC cipher
+        cipher_aes = AES.new(self.key, AES.MODE_CBC, iv)
 
         # Padding uses Public-Key Cryptography Standards #7
-        return b64encode(iv + cipher.encrypt(pad(plaintext.encode(FORMAT), self.block_size)))
+        return b64encode(iv + cipher_aes.encrypt(pad(plaintext.encode(FORMAT), self.block_size)))
 
     def decrypt(self, ciphertext):
         ciphertext = b64decode(ciphertext)
         iv = ciphertext[:self.block_size]
         try:
-            cipher = AES.new(self.key, AES.MODE_CBC, iv)
+            cipher_aes = AES.new(self.key, AES.MODE_CBC, iv)
 
         except ValueError:
             return
 
-        data = cipher.decrypt(ciphertext[self.block_size:])
+        data = cipher_aes.decrypt(ciphertext[self.block_size:])
 
         try:
             return unpad(data, 16)

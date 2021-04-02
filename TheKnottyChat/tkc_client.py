@@ -6,6 +6,7 @@ import subprocess
 import sys
 import platform
 
+from aes_ecb import ElectronicCodeBookAES
 from aes_cbc import CipherBlockChainingAES
 from random import randint
 
@@ -18,13 +19,19 @@ must be changed according to where the server's IP address is listening on the n
 
 Check under Wireless LAN adapter Wi-Fi from the "ipconfig" command in cmd
 """
+# Generate  AES ciphers
+cipher_ecb = ElectronicCodeBookAES()
+cipher_cbc = CipherBlockChainingAES()
+
+# Default Settings
 SERVER_IP = socket.gethostbyname(socket.gethostname())
 SERVER_PORT = 5000
 SERVER_SHELL_PORT = 5050
+cipher = cipher_cbc
 kill_thread = False
-auto_chat = True
+encryption_type = None
+auto_chat = None
 idle = True
-cipher = CipherBlockChainingAES()
 
 
 class SendMessage(threading.Thread):
@@ -36,6 +43,7 @@ class SendMessage(threading.Thread):
         kill_thread = False
 
     def run(self):
+        global cipher
         global kill_thread
         global idle
         while True:
@@ -76,6 +84,7 @@ class ReceiveMessage(threading.Thread):
         kill_thread = False
 
     def run(self):
+        global cipher
         global kill_thread
         global auto_chat
         while True:
@@ -132,6 +141,7 @@ class AutoChatting(threading.Thread):
         kill_thread = False
 
     def run(self):
+        global cipher
         global kill_thread
         global auto_chat
         global idle
@@ -233,6 +243,7 @@ class Client(threading.Thread):
 
     @staticmethod
     def send_message(server_socket, message):
+        global cipher
         # For server to send message to individual client
         message_data = cipher.encrypt(message)
         message_header = f"{len(message_data):<{HEADER_LENGTH}}".encode(FORMAT)
@@ -240,6 +251,7 @@ class Client(threading.Thread):
 
     @staticmethod
     def receive_message(server_socket):
+        global cipher
         # For server to receive message from individual client
         try:
             message_header = server_socket.recv(HEADER_LENGTH)
@@ -297,6 +309,10 @@ class Client(threading.Thread):
     def create_account(self):
         while True:
             new_username = input("Please enter your username: ").lower()
+            if not new_username:
+                print("[PROGRAM]: Please enter a valid username")
+                continue
+
             if new_username == 'q':
                 self.send_message(self.connection, 'q')
                 break
@@ -312,6 +328,10 @@ class Client(threading.Thread):
                 print("[PROGRAM]: Username available!")
                 while True:
                     new_password = input("Please enter your password: ")
+                    if not new_password:
+                        print("[PROGRAM]: Please enter a valid password")
+                        continue
+
                     check_password = input("Please retype your password: ")
                     print()
                     if new_password == check_password:

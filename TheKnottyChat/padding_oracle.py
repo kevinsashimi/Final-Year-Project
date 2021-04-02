@@ -53,7 +53,8 @@ class PaddingOracle:
                         print(f"Guessed byte: {guessed_byte}")
                         current_byte = cipher_blocks[current_block - 1][byte_position]
                         decrypted_byte = chr(predicted_padding ^ guessed_byte ^ current_byte)
-                        print(f"Decrypted byte: {decrypted_byte}\n")
+                        print(f"Decrypted byte: {decrypted_byte}")
+                        print(f"{48 * '-'}\n")
                         self.decrypted_text += decrypted_byte
                         break
 
@@ -125,14 +126,19 @@ if __name__ == '__main__':
             start_time = time.perf_counter()
             try:
                 oracle = PaddingOracle(ct)
-                print(f"Decrypted text: {oracle.decrypted_text}")
+                plaintext = oracle.decrypted_text
+                if plaintext:
+                    print(f"Decrypted text: {oracle.decrypted_text}")
+
+                else:
+                    print("Decryption error")
 
             except Exception as e:
                 print("\nDecryption failed")
                 print(e)
 
             finally:
-                print(f"Elapsed Time: {(time.perf_counter() - start_time):0.6f}s")
+                print(f"\nElapsed Time: {(time.perf_counter() - start_time):0.6f}s")
 
         else:
             print("Invalid choice, please choose either '1' or '0'")

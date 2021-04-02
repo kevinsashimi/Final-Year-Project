@@ -1,21 +1,22 @@
 # Final-Year-Project
 ## Project No.: SCSE20-0163
-## Title: Ways to Hide Weak Implementations of Strong Crypto Algorithms
+## Title: A Study of Some Vulnerabilities in Information Security
 
 ### Project Summary: 
-The use of strong crypto algorithms to protect data does not mean no one can break the system. If there is any part in the cryptosystem that is weakly implemented (either ignorantly or deliberately), encrypted data using strong algorithms still can be retrieved fairly easily! In this project student will study ways of making cryptosystem using strong algorithms weak. Learning this will enable all to know what to look out for when purchasing encryption products.
-Student is expected to be strong in programming and like math.
-Weak student will find this project a challenge, so not advisable to take this project. But good students will enjoy doing this project.
+This project aims to explore different types of methods to hide weak implementations in a legitimate program. These methods include the use of strong crypto algorithms. If there is any part in the cryptosystem that is weakly implemented (either ignorantly or deliberately), encrypted data using strong algorithms can still be retrieved easily without the user’s knowledge.
+Another method being explored, are hiding vulnerabilities in a program to allow attackers to easily take advantage of a remote command execution and having the ability to evade firewalls and avoiding antivirus programs. Thus, simulating a malicious program and the possibilities of what a hacker can do on a compromised machine.
 
 Specific details:
 * Design component
-  * Ways to hide weakness in implementation.
-
+  * Create a software product to integrate an environment for facilitating the testing of weak implementations.
 
 * Implementation component
-  * Based on ways in (a), student will write programs to implement algorithm.
+  * Implement a strong cryptographic algorithm (E.g. AES or RSA).
+  * Provide various ways to hide vulnerabilities.
 
 * Research component
   * Enterprising student will create their own weak implementations, beyond what advisor teach them.
+  * Student will study vulnerabilities of his choice in information security systems, be it crypto, RNG, protocols or other major areas.
 
 * Development component
+  * Student may code using any programming languages to achieve the goal of this project.
