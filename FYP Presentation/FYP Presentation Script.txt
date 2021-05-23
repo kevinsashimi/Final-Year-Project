@@ -1,0 +1,56 @@
+***INTRODUCTION***
+Information Security
+-The purpose of information security and its importance
+-How companies spend on data security
+-Why overspending on data security gives a false sense of security
+-How hackers work their way around to compromise your system
+-Link to the purpose of the project and its objectives/strategy
+-Introduce The Knotty Chat software product
+
+***The Knotty Chat***
+-Describe its usage and functionality/features
+-Explain its architecture
+-Product Demostration/gif
+-How this product 
+
+***Types of hidden vulnerabilities in the software product***
+-Key entropy reduction
+-AES encryption and its mode of operation
+-ECB/CBC
+-ECB Image attack
+-CBC Padding Oracle Attack
+-Reverse Shell
+-Demostration
+
+***Conclusion***
+-Importance of code checking
+-Potential impact of data breach
+-Reccommendations
+
+
+
+***Script***
+When it comes to Information security, it has always played a significant role in ensuring the privacy of our data is securely protected.
+
+It is built around 3 primary objectives, which are: Confidentiality, Integrity and Availability commonly known as the CIA triad, using various processes and tools.
+
+But, does its application mean that there is no vulnerability and the system is always perfect? This is incorrect. Sometimes, a system can be compromised due to poor implementation of the code written in the program, 
+
+*Forex trader data leak case study*
+
+What about the apps that we use in IoT devices? We always tend to give benefit of the doubt and trust whatever apps we download. Unknowingly to us, by using these unsuspecting software, we are faced with these with malicious individuals who are the hackers that compromises our system and breach our data or an intentional motive made by a hacker with the goal of stealing data and information whenever it is available. So you can see that the true nature of vulnerabilities in our daily lives of using technology.
+
+We can see that as the use of IoT devices are increasing exponentially each year, so does the number of cybercrimes being committed. Through statistics, we can see that there is a 15% increase in cyber attacks per year. Especially during the COVID-19 pandemic, where there was a 600% increase in cyber attacks; the highest we have seen during that period in the year 2020.
+
+
+
+Hence, this brings to my project objectives. Here, I will be exploring what are some of the possible vulnerbilities a system may have. In this case, I will be playing as the hacker, creating a malicious product with the goal of compromising my target's machine and retrieve any sensitive data I can find.
+First I would create and design a software product that reproduces a real-time environment for testing.
+Next is to implement strong crypto algorithms such as AES and test out weak implementations of it.
+Finally, research and implement hidden vulnerabilities in the program to carry out exploits to attack the clients.
+
+
+
+
+As a consequence, to prevent such cyber attacks from happening, most companies tend to overspend their budget on data security. However, the common misconception shared by these companies is such that an increase in monetary spending into building better stronger firewalls will undoubtedly result in better data security. Doing the above only give them a false sense of security. Once a part of your security mechanisms has been broken, your system would be compromised, no matter what other kind of defence in depth security measures have been implemented.
+So how do we identify the areas in your system that really needs protecting?

